@@ -10,7 +10,7 @@ import SwiftUI
 struct TimeCard: View {
     var title: String
     var color: Color
-    var time: TimeValue
+    @Binding var time: TimeValue
     
     var body: some View {
         HStack {
@@ -60,8 +60,13 @@ struct TimeCard: View {
 }
 
 #Preview {
-    TimeCard(title: "Testing Title",
-             color: .gray,
-             time: TimeValue(minute: 10, second: 0, hasChosenTime: true))
+    struct Preview: View {
+        @State var time = TimeValue()
+        var body: some View {
+            TimeCard(title: "Testing Title",
+                     color: .gray,
+                     time: $time)
+        }
+    }
+    return Preview()
 }
-

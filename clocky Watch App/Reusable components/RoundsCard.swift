@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RoundsCard: View {
-        var roundValue: RoundValue
+        @Binding var roundValue: RoundValue
         
         var body: some View {
             HStack {
@@ -39,7 +39,7 @@ struct RoundsCard: View {
     @State var roundValue = RoundValue(count: 5, hasChosen: false)
 
         var body: some View {
-            RoundsCard(roundValue: roundValue )
+            RoundsCard(roundValue: $roundValue )
         }
     }
 
