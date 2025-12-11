@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var prepTime = TimeValue()
-    @State private var roundTime = TimeValue()
-    @State private var restTime = TimeValue()
-    @State private var roundValue = RoundValue()
+    @State private var vm = WorkoutViewModel()
+    @State private var navigateToWorkout = false
     
     var body: some View {
         NavigationStack {
@@ -19,36 +17,50 @@ struct ContentView: View {
                 VStack(spacing: 12) {
                     
                     NavigationLink {
-                        TimeDetailView(time: $prepTime, title: "Prep Time")
+                        TimeDetailView(time: $vm.prepTime, title: "Prep Time")
                     } label: {
                         TimeCard(title: "Prep\nTime",
                                  color: Color(.lightGray),
-                                 time: prepTime)
+                                 time: $vm.prepTime)
                     }
                     
                     NavigationLink {
-                        TimeDetailView(time: $roundTime, title: "Round Time")
+                        TimeDetailView(time: $vm.roundTime, title: "Round Time")
                     } label: {
                         TimeCard(title: "Round\nTime",
                                  color: .red,
-                                 time: roundTime)
+                                 time: $vm.roundTime)
                     }
                     
                     NavigationLink {
-                        TimeDetailView(time: $restTime, title: "Rest Time")
+                        TimeDetailView(time: $vm.restTime, title: "Rest Time")
                     } label: {
                         TimeCard(title: "Rest\nTime",
                                  color: Color(.lightGray),
-                                 time: restTime)
+                                 time: $vm.restTime)
                     }
                     
                     NavigationLink {
-                        RoundDetailView(roundValue: $roundValue)
+                        RoundDetailView(roundValue: $vm.roundValue)
                     } label: {
-                        RoundsCard(roundValue: roundValue)
+                        RoundsCard(roundValue: $vm.roundValue)
+                    }
+                    
+                    Text("Session's total time: \(vm.totalSessionFormatted)")
+                    
+                    Button("Start") {
+                        navigateToWorkout = true
                     }
                 }
                 .padding(.horizontal)
+                .navigationDestination(isPresented: $navigateToWorkout) {
+                    WorkoutView(
+                        prepSeconds: vm.prepSeconds,
+                        roundSeconds: vm.roundSeconds,
+                        restSeconds: vm.restSeconds,
+                        rounds: vm.rounds
+                    )
+                }
             }
         }
     }
