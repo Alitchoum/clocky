@@ -8,8 +8,6 @@
 import SwiftUI
 import WatchKit
 
-
-
 struct WorkoutView: View {
     @State var timerVM: TimerViewModel
        
