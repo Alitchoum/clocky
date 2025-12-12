@@ -36,7 +36,7 @@ struct TimeCard: View {
                     )
             } else {
                 // Show chosen time
-                HStack(spacing: 6) {
+                HStack(spacing: -8) {
                     Circle()
                         .fill(Color.black)
                         .frame(width: 36, height: 36)
@@ -65,11 +65,12 @@ struct TimeCard: View {
 
 #Preview {
     struct Preview: View {
-        @State var time = TimeValue()
+        @State var timeValue = TimeValue(minute: 4, second: 30, hasChosenTime: true)
         var body: some View {
-            TimeCard(title: "Testing Title",
-                     color: .gray,colorSeconds: .rouge ,
-                     time: $time)
+            TimeCard(title: "Testing\n Title",
+                     color: .gray,
+                     colorSeconds: .rouge,
+                     time: $timeValue)
         }
     }
     return Preview()

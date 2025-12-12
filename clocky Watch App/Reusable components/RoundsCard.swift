@@ -38,7 +38,7 @@ struct RoundsCard: View {
 
 #Preview {
     struct Preview: View {
-    @State var roundValue = RoundValue(count: 5, hasChosen: false)
+    @State var roundValue = RoundValue(count: 5, hasChosen: true)
 
         var body: some View {
             RoundsCard(roundValue: $roundValue )
