@@ -21,6 +21,7 @@ struct DoubleTimePicker: View {
                 }
             }
             .pickerStyle(.wheel)
+            .pickerStyle(WheelPickerStyle())
 
             Text(":")
 
@@ -32,6 +33,13 @@ struct DoubleTimePicker: View {
             .pickerStyle(.wheel)
         }
         .frame(width: 141, height: 95)
+        HStack{
+            Text("Min")
+            Spacer()
+            Text("Sec")
+        }
+        .font(.footnote)
+        .frame(width: 103)
     }
 }
 

@@ -28,6 +28,7 @@ struct RoundDetailView: View {
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(.rouge)
             }
             .padding()
         }
