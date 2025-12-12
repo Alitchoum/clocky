@@ -11,6 +11,19 @@ struct ContentView: View {
     @State private var vm = WorkoutViewModel()
     @State private var navigateToWorkout = false
     
+    private var phases: [Phase] {
+        workoutPhases(
+            prepSeconds: vm.prepSeconds,
+            roundSeconds: vm.roundSeconds,
+            restSeconds: vm.restSeconds,
+            rounds: vm.rounds
+        )
+    }
+     
+    private var timerVM: TimerViewModel {
+        TimerViewModel(phases: phases, workoutVM: vm)
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView{
@@ -54,12 +67,7 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 .navigationDestination(isPresented: $navigateToWorkout) {
-                    WorkoutView(
-                        prepSeconds: vm.prepSeconds,
-                        roundSeconds: vm.roundSeconds,
-                        restSeconds: vm.restSeconds,
-                        rounds: vm.rounds
-                    )
+                    WorkoutView(timerVM: timerVM)
                 }
             }
         }
