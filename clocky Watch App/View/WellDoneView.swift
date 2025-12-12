@@ -22,9 +22,11 @@ struct WellDoneView: View {
                     .multilineTextAlignment(.trailing)
                     .padding(.bottom, 40)
                     .padding()
+                    .fixedSize(horizontal: false, vertical: true)
                     .overlay(alignment: .leading) {
                         Image(.star)
                             .padding(.top, 50)
+                        
                     }
                 
             }

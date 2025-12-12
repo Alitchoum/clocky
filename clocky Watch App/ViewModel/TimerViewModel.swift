@@ -15,6 +15,8 @@ class TimerViewModel {
     var currentPhaseIndex: Int = 0
     var timeRemaining: Int = 0
     var color: Color = .clear
+    var isPlaying = false
+    var isFinish = false
     
     var timer: Timer?
     var startDate: Date = .now
@@ -25,10 +27,36 @@ class TimerViewModel {
         loadPhase(at: 0)
     }
     
+    //PROPRIETÉ CALCULÉE POUR ROUND EN COURS
+    var currentRound: Int {
+        var round = 0
+        
+        for i in 0...currentPhaseIndex {
+            if phases[i].type == .round {
+                round += 1
+            }
+        }
+        
+        return round
+    }
+
+    
+    var phaseText: String {
+        switch phases[currentPhaseIndex].type {
+        case .prep:
+            return "Prep Time"
+        case .round:
+            return "Round Time"
+        case .rest:
+            return "Rest Time"
+        }
+    }
+    
     //pour démarrer une phase -> compte si la phase actuelle est compris dans le nombre de phase total
     func loadPhase(at index: Int) {
         guard index < phases.count else {
             stopTimer()
+            isFinish = true
             return
         }
     //phase actuelle parmis l'ensemble de phase
@@ -46,6 +74,8 @@ class TimerViewModel {
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.tick()
+            self.isPlaying = true
+
         }
     }
     
@@ -68,6 +98,7 @@ class TimerViewModel {
     func stopTimer() {
         timer?.invalidate()
         timer = nil
+        self.isPlaying = false
     }
     
     //MARK: - Mise en place d'une phase de préparation + phases d'entrainements
@@ -94,5 +125,13 @@ class TimerViewModel {
         return phases
     }
     
-    
+    //FONCTION PLAY/PAUSE
+    func playPause() {
+        if isPlaying {
+            stopTimer()
+        } else {
+            start()
+        }
+    }
+
 }

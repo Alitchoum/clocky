@@ -15,6 +15,8 @@ class WorkoutViewModel {
     var restTime: TimeValue = TimeValue()
     var roundValue: RoundValue = RoundValue()
     
+    var phaseText = ["Prep time","round time","Rest time", "Nb of rounds"]
+    
     // MARK: - Transforming everything in seconds
     
     var prepSeconds:Int {
@@ -44,7 +46,4 @@ class WorkoutViewModel {
         let seconds = totalSessionSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-    
-
-    
-    }
+}
