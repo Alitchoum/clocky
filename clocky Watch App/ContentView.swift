@@ -27,13 +27,14 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView{
-                VStack(spacing: 12) {
+                VStack(spacing: 10) {
                     
                     NavigationLink {
                         TimeDetailView(time: $vm.prepTime, title: "Prep Time")
                     } label: {
                         TimeCard(title: "Prep\nTime",
-                                 color: Color(.lightGray),
+                                 color: Color(.grisClair),
+                                 colorSeconds: Color(.rouge),
                                  time: $vm.prepTime)
                     }
                     
@@ -41,7 +42,8 @@ struct ContentView: View {
                         TimeDetailView(time: $vm.roundTime, title: "Round Time")
                     } label: {
                         TimeCard(title: "Round\nTime",
-                                 color: .red,
+                                 color: Color(.rouge),
+                                 colorSeconds: Color(.grisClair),
                                  time: $vm.roundTime)
                     }
                     
@@ -49,7 +51,8 @@ struct ContentView: View {
                         TimeDetailView(time: $vm.restTime, title: "Rest Time")
                     } label: {
                         TimeCard(title: "Rest\nTime",
-                                 color: Color(.lightGray),
+                                 color: Color(.gris),
+                                 colorSeconds: Color(.rouge),
                                  time: $vm.restTime)
                     }
                     
@@ -64,7 +67,13 @@ struct ContentView: View {
                     Button("Start") {
                         navigateToWorkout = true
                     }
+                    .frame(width: 151, height: 38)
+                    .cornerRadius(25)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.rouge)
+                    
                 }
+                .buttonStyle(.plain)
                 .padding(.horizontal)
                 .navigationDestination(isPresented: $navigateToWorkout) {
                     WorkoutView(timerVM: timerVM)

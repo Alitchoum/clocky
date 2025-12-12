@@ -12,14 +12,15 @@ struct RoundsCard: View {
         
         var body: some View {
             HStack {
-                Text("N° of\nRounds")
-                    .font(.title3)
+                Text("N°of\nRounds")
+                    .font(.title2)
                     .bold()
+                    .foregroundColor(.black)
                 
                 Spacer()
                 
                 Circle()
-                    .fill(roundValue.hasChosen ? Color.red : Color.black)
+                    .fill(roundValue.hasChosen ? Color.black : Color.black)
                     .frame(width: 36, height: 36)
                     .overlay(
                         Text(roundValue.hasChosen ? "\(roundValue.count)" : "→")
@@ -27,8 +28,9 @@ struct RoundsCard: View {
                     )
             }
             .padding()
-            .frame(height: 80)
-            .background(Color.gray)
+            .frame(height: 90)
+            .frame(maxWidth: .infinity)
+            .background(Color.rouge)
             .cornerRadius(18)
         }
     }

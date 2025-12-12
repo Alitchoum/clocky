@@ -16,7 +16,7 @@ struct TimeDetailView: View {
     var body: some View {
         VStack {
             Text(title)
-                .font(.title2)
+                .font(.title3)
                 .bold()
             
             Spacer()
@@ -29,7 +29,10 @@ struct TimeDetailView: View {
                 time.hasChosenTime = true   
                 dismiss()
             }
+            .frame(width: 151, height: 38)
+            .cornerRadius(25)
             .buttonStyle(.borderedProminent)
+            .tint(.rouge)
         }
         .padding()
     }

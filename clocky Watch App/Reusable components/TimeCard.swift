@@ -10,6 +10,7 @@ import SwiftUI
 struct TimeCard: View {
     var title: String
     var color: Color
+    var colorSeconds: Color
     @Binding var time: TimeValue
     
     var body: some View {
@@ -18,6 +19,8 @@ struct TimeCard: View {
                 Text(title)
                     .font(.title2)
                     .bold()
+                    .foregroundColor(.black)
+
             }
             
             Spacer()
@@ -43,17 +46,18 @@ struct TimeCard: View {
                         )
                     
                     Circle()
-                        .fill(Color.red)
+                        .fill(colorSeconds)
                         .frame(width: 36, height: 36)
                         .overlay(
                             Text("\(time.second)")
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                         )
                 }
             }
         }
         .padding()
-        .frame(height: 80)
+        .frame(height: 90)
+        .frame(maxWidth: .infinity)
         .background(color)
         .cornerRadius(18)
     }
@@ -64,7 +68,7 @@ struct TimeCard: View {
         @State var time = TimeValue()
         var body: some View {
             TimeCard(title: "Testing Title",
-                     color: .gray,
+                     color: .gray,colorSeconds: .rouge ,
                      time: $time)
         }
     }
